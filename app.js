@@ -1,11 +1,22 @@
-const ping = require("ping");
-const async = require("async");
-const fs = require("file-system");
+const rp = require("request-promise");
 const sha = require("sha1");
-const Parser = require("rss-parser");
 
-const pingHealth = require("./modules/ping_health.js");
-const rssAmazon = require("./modules/rss_amazon.js");
+var statusReport = require("./rssAmazonConfig.json");
 
-var array = pingHealth();
-rssAmazon();
+var apiEndpoint = {
+  url: "www.example.com",
+  json: false
+};
+
+rp(apiEndpoint)
+  .then(body => {
+    if (body == sha(statusReport)) {
+      //Everything Fine
+    } else {
+      // Oh BOY!
+    }
+  })
+  .catch(err => {
+    console.log(err);
+    //EndPoint not live
+  });
