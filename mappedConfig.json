@@ -1,0 +1,10 @@
+{
+  "www.google.com": [
+    "https://status.aws.amazon.com/rss/ec2-us-west-1.rss",
+    "https://status.aws.amazon.com/rss/cloudwatch-us-west-2.rss"
+  ],
+  "www.facebook.com": [
+    "https://status.aws.amazon.com/rss/appstream2-us-east-1.rss"
+  ],
+  "www.amazon.com": ["https://status.aws.amazon.com/rss/a4b-us-east-1.rss"]
+}

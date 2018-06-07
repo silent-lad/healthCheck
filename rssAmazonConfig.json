@@ -1,0 +1,26 @@
+{
+  "list": [
+    {
+      "URL": "https://status.aws.amazon.com/rss/ec2-us-west-1.rss",
+      "prev_hash": "b5c66149180d55c20b58abe6b62ca0d3169df0f1"
+    },
+    {
+      "URL": "https://status.aws.amazon.com/rss/cloudwatch-us-west-2.rss",
+      "prev_hash": "22614547cd0af6ff3656bbe5d524c3860f983bc1"
+    },
+    {
+      "URL": "https://status.aws.amazon.com/rss/appstream2-us-east-1.rss",
+      "prev_hash": "47738ed6997e13e6a48b569d455ed85478d1262c"
+    },
+    {
+      "URL": "https://status.aws.amazon.com/rss/a4b-us-east-1.rss",
+      "prev_hash": ""
+    }
+  ],
+  "status": {
+    "https://status.aws.amazon.com/rss/ec2-us-west-1.rss": true,
+    "https://status.aws.amazon.com/rss/cloudwatch-us-west-2.rss": true,
+    "https://status.aws.amazon.com/rss/appstream2-us-east-1.rss": true,
+    "https://status.aws.amazon.com/rss/a4b-us-east-1.rss": true
+  }
+}
