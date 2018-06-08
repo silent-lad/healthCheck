@@ -1,5 +1,4 @@
 const fs = require("file-system");
-const sha = require("sha1");
 const Parser = require("rss-parser");
 const async = require("async");
 

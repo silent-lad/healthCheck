@@ -5,11 +5,11 @@ var statusReport = require("./rssAmazonConfig.json");
 
 var apiEndpoints = [
   {
-    url: "www.example.com",
+    url: "www.example.com/check/hash",
     json: false
   },
   {
-    url: "www.example1.com",
+    url: "www.example1.com/check/hash",
     json: false
   }
 ];
