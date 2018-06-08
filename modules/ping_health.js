@@ -20,7 +20,7 @@ var asyncPing = () => {
 
           if (++key.failCount > pingConfig.maxFail) {
             key.failCount = 0;
-            fs.writeFile("pingConfig.json", JSON.stringify(pingConfig)); //TODO
+            fs.writeFile("pingConfig.json", JSON.stringify(pingConfig));
             // console.log("DEAD ULTIMATE", key.URL);
             var url = key.URL;
             var doubtedServices = map[`${url}`];
