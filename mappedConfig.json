@@ -6,5 +6,6 @@
   "www.facebook.com": [
     "https://status.aws.amazon.com/rss/appstream2-us-east-1.rss"
   ],
-  "www.amazon.com": ["https://status.aws.amazon.com/rss/a4b-us-east-1.rss"]
+  "www.amazon.com": ["https://status.aws.amazon.com/rss/a4b-us-east-1.rss"],
+  "www.twitter.com": ["cloud-networking"]
 }

@@ -41,26 +41,30 @@ let rssPoll = () => {
         }
       } else {
         //Google LOOP
-        if (parsedFeed.items[0].title.startsWith("RESOLVED")) {
-          if (rss.status[key] == false) {
-            console.log("error resolved");
-            rss.status[key] = true;
-            fs.writeFile("./rssAmazonConfig.json", JSON.stringify(rssConfig));
-            processedURL();
+        if (processedURL.items[0].link.indexOf(key) != -1) {
+          if (parsedFeed.items[0].title.startsWith("RESOLVED")) {
+            if (rss.status[key] == false) {
+              console.log("error resolved");
+              rss.status[key] = true;
+              fs.writeFile("./rssAmazonConfig.json", JSON.stringify(rssConfig));
+              processedURL();
+            } else {
+              console.log("Everything alright");
+              processedURL();
+            }
           } else {
-            console.log("Everything alright");
-            processedURL();
+            if (!rss.status[key]) {
+              console.log("Old error persists");
+              processedURL();
+            } else {
+              console.log("New error");
+              rss.status[key] = false;
+              fs.writeFile("./rssAmazonConfig.json", JSON.stringify(rssConfig));
+              processedURL();
+            }
           }
         } else {
-          if (!rss.status[key]) {
-            console.log("Old error persists");
-            processedURL();
-          } else {
-            console.log("New error");
-            rss.status[key] = false;
-            fs.writeFile("./rssAmazonConfig.json", JSON.stringify(rssConfig));
-            processedURL();
-          }
+          console.log("Everything fine");
         }
       }
     })();
