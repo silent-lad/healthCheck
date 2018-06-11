@@ -4,6 +4,15 @@ const fs = require("file-system");
 
 const email = require("./mail.js");
 
+var pingCounterReset = () => {
+  var rssConfig = require("./pingConfig.json");
+  rssConfig.list.forEach(element => {
+    element.failCount = 0;
+  });
+  console.log(rssConfig);
+  fs.writeFile("./pingConfig.json", JSON.stringify(rssConfig));
+}
+
 var asyncPing = () => {
   let { map } = require("./mappedConfig.json");
   let rssConfig = require("./rssConfig.json");
@@ -47,4 +56,9 @@ var asyncPing = () => {
   );
 };
 
-module.exports = asyncPing;
+asyncPing();
+if (Date.now() % 1800 == 0) {
+  pingCounterReset();
+}
+
+
