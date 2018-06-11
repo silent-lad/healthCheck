@@ -2,6 +2,11 @@ var nodemailer = require("nodemailer");
 var hbs = require('nodemailer-express-handlebars');
 
 var mailCredentials = require("./mailCredentials.json");
+// JSON format for mailCredentials.json:-
+// {
+//   "user": "YOUR_EMAIL_ID",
+//   "password": "YOUR_PASSWORD"
+// }
 var { mailingList } = require("./mappedConfig.json");
 
 var email = (type, defectedService, error, cause) => {
@@ -59,14 +64,9 @@ var email = (type, defectedService, error, cause) => {
     if (error) {
       console.log(error);
     } else {
-      // console.log('mail sent to ' + eAdress);
       console.log(response);
     }
   });
 };
-// sendMail("Hi", "Hello");
-// sendMail("");
-
-// email("SERVERRRES", "bleh", "blah", "blu");
 
 module.exports = email;

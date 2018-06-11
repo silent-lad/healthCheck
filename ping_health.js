@@ -16,15 +16,14 @@ var asyncPing = () => {
           if (++key.failCount > pingConfig.maxFail) {
             key.failCount = 0;
             fs.writeFile("pingConfig.json", JSON.stringify(pingConfig));
-            // console.log("DEAD ULTIMATE", key.URL);
+            // DEAD ULTIMATE
             var url = key.URL;
             var doubtedServices = map[`${url}`];
-            // console.log(doubtedServices.length);
             doubtedServices.forEach(element => {
               if (rssConfig.status[`${element}`]) {
-                email("PINGERR", key, "Not replying to ping requests", "Internal App error")
+                email("PINGERR", key, "not replying to ping requests", "Internal App error")
               } else {
-                email("PINGSERVERR", key, "Not replying to ping requests", element)
+                email("PINGSERVERR", key, "not replying to ping requests", element)
               }
             });
             callback();

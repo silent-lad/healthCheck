@@ -8,7 +8,6 @@ const email = require("./mail.js");
 let rssPoll = () => {
   const rssConfig = require("./rssConfig.json");
   const URLs = Object.keys(rssConfig.status);
-  let alerts = [];
   async.each(URLs, (key, processedURL) => {
     let parser = new Parser();
     let currURL;

@@ -28,6 +28,7 @@ checkers.forEach(endpoint => {
         if (errCount % 5 == 0) {
           email("HEALTHCHECKDOWN", endpoint, " not responding to get request", `${me}`)
         }
+        errCount++;
       });
   }
 
