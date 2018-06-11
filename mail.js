@@ -67,6 +67,6 @@ var email = (type, defectedService, error, cause) => {
 // sendMail("Hi", "Hello");
 // sendMail("");
 
-email("SERVERRRES", "bleh", "blah", "blu");
+// email("SERVERRRES", "bleh", "blah", "blu");
 
 module.exports = email;

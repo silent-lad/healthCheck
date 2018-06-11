@@ -1,7 +1,7 @@
 const fs = require("fs");
 const async = require("async");
 
-var { map } = require("./mappedConfig.json");
+const { map } = require("./mappedConfig.json");
 
 var status = {};
 
