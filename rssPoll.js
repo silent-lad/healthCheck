@@ -30,10 +30,6 @@ let rssPoll = () => {
                 processedURL();
               } else {
                 console.log("Error Resolved");
-                var alert = new Object();
-                alert.title = "Error Resolved";
-                alert.description = `The error in service ${key} is now resolved.`;
-                alert.error = `Error RESOLVED:- ${parsedFeed.items[1].description}`
                 rssConfig.status[key] = true;
                 fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
                 // console.log(parsedFeed.items[1].content);
@@ -46,10 +42,6 @@ let rssPoll = () => {
                 console.log("New Error");
                 rssConfig.status[key] = false;
                 fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
-                var alert = new Object();
-                alert.title = "New Error";
-                alert.description = `New error in service ${key}.`;
-                alert.error = `Error:- ${parsedFeed.items[1].content}`
                 email("SERVERR", key, parsedFeed.items[1].title, parsedFeed.items[1].content);
                 processedURL();
               } else {
@@ -70,10 +62,6 @@ let rssPoll = () => {
             if (parsedFeed.items[1].title.startsWith("RESOLVED")) {
               if (rssConfig.status[key] == false) {
                 console.log("error resolved");
-                var alert = new Object();
-                alert.title = "Error Resolved";
-                alert.description = `The error in service ${key} is now resolved.`;
-                alert.error = `Error RESOLVED :- ${parsedFeed.items[1].content}`;
                 rssConfig.status[key] = true;
                 fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
                 email("SERVERRRES", key, parsedFeed.items[1].title, parsedFeed.items[1].content);
@@ -88,10 +76,6 @@ let rssPoll = () => {
                 processedURL();
               } else {
                 console.log("New error");
-                var alert = new Object();
-                alert.title = "New Error";
-                alert.description = `New error in service ${key} .`;
-                alert.error = `Error:- ${parsedFeed.items[1].content}`
                 rssConfig.status[key] = false;
                 fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
                 email("SERVERR", key, parsedFeed.items[1].title, parsedFeed.items[1].content)

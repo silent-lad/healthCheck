@@ -7,18 +7,25 @@ var mailCredentials = require("./mailCredentials.json");
 
 var email = (type, defectedService, error, cause) => {
   var defaultLayout;
-  if (type == "PINGERR") {
-    defaultLayout = 'pingError';
-  } else if (type == "SERVERR") {
-    defaultLayout = 'serviceError';
-  } else if (type == "PINGSERVERR") {
-    defaultLayout = 'pingServiceError';
-  } else if (type == "SERVERRRES") {
-    defaultLayout = 'serviceErrorRes';
-  } else if (type == "HEALTHCHECK") {
-    defaultLayout = 'healthCheck'
-  } else if (type == "HEALTHCHECKDOWN") {
-    defaultLayout = 'healthCheckDown';
+  switch (type) {
+    case "PINGERR":
+      defaultLayout = 'pingError';
+      break;
+    case "SERVERR":
+      defaultLayout = 'serviceError';
+      break;
+    case "PINGSERVERR":
+      defaultLayout = 'pingServiceError';
+      break;
+    case "SERVERRRES":
+      defaultLayout = 'serviceErrorRes';
+      break;
+    case "HEALTHCHECK":
+      defaultLayout = 'healthCheck';
+      break;
+    case "HEALTHCHECKDOWN":
+      defaultLayout = 'healthCheckDown';
+      break;
   }
   var options = {
     viewEngine: {
