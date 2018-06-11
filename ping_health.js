@@ -47,6 +47,4 @@ var asyncPing = () => {
   );
 };
 
-asyncPing();
-
 module.exports = asyncPing;
