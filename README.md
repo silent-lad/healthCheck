@@ -19,6 +19,15 @@ var email = (type, defectedService, error, cause)
 
 ## __Common Config File__:- mappedConfig.json
 >It contains all the initial config for the whole codebase ,all other json files are generated this file using loader.js 
->This makes it also maps the services with our sites to know the cause of site being down .
+>This makes it also maps the services with our sites to know the cause of site being down.
+
+### Fields in mappedConfig:-
+>Mailinglist:- It contains the list of people to be alerted when alarm is triggered.
+>Checkers:- It contains list of health checkers up right now
+>Map:- It contains the maping between sites and cloud services.
+
+## __LOADER.JS , pingConfig.json , rssConfig.json:-__
+>The 2 json files contain the state for rssPoll and ping_health functions. The Loader.js generates or updates these 2 files on initial setup or changes in main config file.
+
 
 
