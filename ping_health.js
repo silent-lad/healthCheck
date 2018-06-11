@@ -5,7 +5,7 @@ const fs = require("file-system");
 const email = require("./mail.js");
 
 var asyncPing = () => {
-  let map = require("./mappedConfig.json");
+  let { map } = require("./mappedConfig.json");
   let rssConfig = require("./rssConfig.json");
   let pingConfig = require("./pingConfig.json");
   async.each(

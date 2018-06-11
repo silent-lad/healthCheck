@@ -1,11 +1,26 @@
 {
-  "www.google.com": [
-    "https://status.aws.amazon.com/rss/ec2-us-west-1.rss",
-    "https://status.aws.amazon.com/rss/cloudwatch-us-west-2.rss"
+  "map": {
+    "www.google.com": [
+      "https://status.aws.amazon.com/rss/ec2-us-west-1.rss",
+      "https://status.aws.amazon.com/rss/cloudwatch-us-west-2.rss"
+    ],
+    "www.facebook.com": [
+      "https://status.aws.amazon.com/rss/appstream2-us-east-1.rss"
+    ],
+    "www.amazon.com": [
+      "https://status.aws.amazon.com/rss/a4b-us-east-1.rss"
+    ],
+    "www.twitter.com": [
+      "cloud-networking"
+    ]
+  },
+  "checkers": [
+    "http://www.example1.com",
+    "http://www.example2.com",
+    "http://www.example3.com"
   ],
-  "www.facebook.com": [
-    "https://status.aws.amazon.com/rss/appstream2-us-east-1.rss"
-  ],
-  "www.amazon.com": ["https://status.aws.amazon.com/rss/a4b-us-east-1.rss"],
-  "www.twitter.com": ["cloud-networking"]
+  "mailingList": [
+    "divyansh2998@icloud.com",
+    "divyanshtripathi1998@gmail.com"
+  ]
 }

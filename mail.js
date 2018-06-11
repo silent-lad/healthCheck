@@ -44,31 +44,31 @@ var email = (type, defectedService, error, cause) => {
     }
   });
   console.log(defaultLayout);
-
+  var { mailingList } = require("./mappedConfig.json")
 
   mailer.use('compile', hbs(options));
-  async.each(mailingList.list, eAdress => {
-    mailer.sendMail({
-      from: `${mailCredentials.user}`,
-      to: `${eAdress}`,
-      subject: 'ALERT',
-      template: `${defaultLayout}`,
-      context: {
-        defectedService: `${defectedService}`,
-        error: `${error}`,
-        cause: `${cause}`
-      }
-    }, function (error, response) {
-      console.log('mail sent to ' + eAdress);
+  mailer.sendMail({
+    from: `${mailCredentials.user}`,
+    to: mailingList,
+    subject: 'ALERT',
+    template: `${defaultLayout}`,
+    context: {
+      defectedService: `${defectedService}`,
+      error: `${error}`,
+      cause: `${cause}`
+    }
+  }, function (error, response) {
+    if (error) {
       console.log(error);
-
-      // mailer.close();
-    });
+    } else {
+      // console.log('mail sent to ' + eAdress);
+      console.log(response);
+    }
   });
 };
 // sendMail("Hi", "Hello");
 // sendMail("");
 
-
+email("SERVERRRES", "bleh", "blah", "blu");
 
 module.exports = email;
