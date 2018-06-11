@@ -2,71 +2,112 @@ const fs = require("file-system");
 const Parser = require("rss-parser");
 const async = require("async");
 
+const email = require("./mail.js");
+
+
 let rssPoll = () => {
-  const rssConfig = require("../rssAmazonConfig.json");
+  const rssConfig = require("./rssConfig.json");
   const URLs = Object.keys(rssConfig.status);
+  let alerts = [];
   async.each(URLs, (key, processedURL) => {
     let parser = new Parser();
     let currURL;
     key.startsWith("https")
       ? (currURL = key)
-      : (currURL = "https://status.cloud.google.com/incidents.json");
+      : (currURL = "https://status.cloud.google.com/feed.atom");
+    console.log(currURL);
+
     (async () => {
-      let parsedFeed = await parser.parseURL(currURL);
-      if (currURL == key) {
-        //AMAZON LOOP
-        if (parsedFeed.items[0]) {
-          if (parsedFeed.items[0].title.startsWith("S")) {
-            if (rss.status[key]) {
-              console.log("Everything Fine");
-              processedURL();
+      try {
+        let parsedFeed = await parser.parseURL(currURL);
+        if (currURL == key) {
+          //AMAZON LOOP
+          if (parsedFeed.items[1]) {
+            if (parsedFeed.items[1].title.startsWith("S")) {
+              if (rssConfig.status[key]) {
+                console.log("Everything Fine");
+                // console.log(parsedFeed.items[1].content);
+                processedURL();
+              } else {
+                console.log("Error Resolved");
+                var alert = new Object();
+                alert.title = "Error Resolved";
+                alert.description = `The error in service ${key} is now resolved.`;
+                alert.error = `Error RESOLVED:- ${parsedFeed.items[1].description}`
+                rssConfig.status[key] = true;
+                fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
+                // console.log(parsedFeed.items[1].content);
+
+                email("SERVERRRES", key, parsedFeed.items[1].title, parsedFeed.items[1].content)
+                processedURL();
+              }
             } else {
-              console.log("Error resolved");
-              rss.status[key] = true;
-              fs.writeFile("./rssAmazonConfig.json", JSON.stringify(rssConfig));
-              processedURL();
+              if (rssConfig.status[key]) {
+                console.log("New Error");
+                rssConfig.status[key] = false;
+                fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
+                var alert = new Object();
+                alert.title = "New Error";
+                alert.description = `New error in service ${key}.`;
+                alert.error = `Error:- ${parsedFeed.items[1].content}`
+                email("SERVERR", key, parsedFeed.items[1].title, parsedFeed.items[1].content);
+                processedURL();
+              } else {
+                console.log("old error Persists");
+                processedURL();
+              }
             }
           } else {
-            if (rss.status[key]) {
-              console.log("New Error");
-              rss.status[key] = false;
-              fs.writeFile("./rssAmazonConfig.json", JSON.stringify(rssConfig));
-              processedURL();
-            } else {
-              console.log("old error Persists");
-              processedURL();
-            }
-          }
-        }
-      } else {
-        //Google LOOP
-        if (processedURL.items[0].link.indexOf(key) != -1) {
-          if (parsedFeed.items[0].title.startsWith("RESOLVED")) {
-            if (rss.status[key] == false) {
-              console.log("error resolved");
-              rss.status[key] = true;
-              fs.writeFile("./rssAmazonConfig.json", JSON.stringify(rssConfig));
-              processedURL();
-            } else {
-              console.log("Everything alright");
-              processedURL();
-            }
-          } else {
-            if (!rss.status[key]) {
-              console.log("Old error persists");
-              processedURL();
-            } else {
-              console.log("New error");
-              rss.status[key] = false;
-              fs.writeFile("./rssAmazonConfig.json", JSON.stringify(rssConfig));
-              processedURL();
-            }
+            rssConfig.status[key] = true;
+            fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
+            processedURL();
           }
         } else {
-          console.log("Everything fine");
+          //Google LOOP
+          // console.log( parsedFeed);
+
+          if (parsedFeed.items[1].link.indexOf(key) != -1) {
+            if (parsedFeed.items[1].title.startsWith("RESOLVED")) {
+              if (rssConfig.status[key] == false) {
+                console.log("error resolved");
+                var alert = new Object();
+                alert.title = "Error Resolved";
+                alert.description = `The error in service ${key} is now resolved.`;
+                alert.error = `Error RESOLVED :- ${parsedFeed.items[1].content}`;
+                rssConfig.status[key] = true;
+                fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
+                email("SERVERRRES", key, parsedFeed.items[1].title, parsedFeed.items[1].content);
+                processedURL();
+              } else {
+                console.log("Everything alright");
+                processedURL();
+              }
+            } else {
+              if (!rssConfig.status[key]) {
+                console.log("Old error persists");
+                processedURL();
+              } else {
+                console.log("New error");
+                var alert = new Object();
+                alert.title = "New Error";
+                alert.description = `New error in service ${key} .`;
+                alert.error = `Error:- ${parsedFeed.items[1].content}`
+                rssConfig.status[key] = false;
+                fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
+                email("SERVERR", key, parsedFeed.items[1].title, parsedFeed.items[1].content)
+                processedURL();
+              }
+            }
+          } else {
+            console.log("Everything fine");
+          }
         }
+      } catch (e) {
+        console.log(e.code);
       }
     })();
   });
 };
 rssPoll();
+
+

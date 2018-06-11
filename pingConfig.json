@@ -1,8 +1,21 @@
 {
   "list": [
-    { "URL": "www.google.com", "failCount": 0 },
-    { "URL": "www.facebook.com", "failCount": 0 },
-    { "URL": "www.amazon.com", "failCount": 0 }
+    {
+      "URL": "www.google.com",
+      "failCount": 5
+    },
+    {
+      "URL": "www.facebook.com",
+      "failCount": 5
+    },
+    {
+      "URL": "www.amazon.com",
+      "failCount": 5
+    },
+    {
+      "URL": "www.twitter.com",
+      "failCount": 5
+    }
   ],
   "maxFail": 5
 }

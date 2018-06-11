@@ -12,6 +12,8 @@
     "async": "^2.6.1",
     "express": "^4.16.3",
     "file-system": "^2.2.2",
+    "nodemailer": "^4.6.5",
+    "nodemailer-express-handlebars": "^3.0.0",
     "ping": "^0.2.2",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",

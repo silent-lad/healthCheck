@@ -1,1 +1,3 @@
 node_modules
+mailCredentials.json
+modules/rss_amazon.js

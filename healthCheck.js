@@ -1,7 +1,10 @@
 const rp = require("request-promise");
 const sha = require("sha1");
 
-var statusReport = require("./rssAmazonConfig.json");
+const email = require("./mail.js");
+let me = "www.healthcheck.com";
+
+var statusReport = require("./rssConfig.json");
 
 var apiEndpoints = [
   {
@@ -13,17 +16,26 @@ var apiEndpoints = [
     json: false
   }
 ];
+
+var errCount = 1;
+var reported = false;
+
 apiEndpoints.forEach(endpoint => {
-  rp(endpoint)
+  rp(endpoint.url)
     .then(body => {
       if (body == sha(statusReport)) {
-        //Everything Fine
+        console.log("Everything Fine");
+        reported = false;
       } else {
-        // Oh BOY!
+        if (!reported) {
+          email("HEALTHCHEACK", endpoint.url, me, "");
+          reported = true;
+        }
       }
     })
     .catch(err => {
-      console.log(err);
-      //EndPoint not live
+      if (errCount % 5 == 0) {
+        email("HEALTHCHECKDOWN", endpoint.url, " not responding to get request", `${me}`)
+      }
     });
 });
