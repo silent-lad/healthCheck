@@ -11,8 +11,8 @@
 > of time (decided by us),alert will be triggered.
 
 ## __Mailer__:- JS FILE:-mail.js
->An exported function which is used to send emails
-var email = (type, defectedService, error, cause)
+>An exported function which is used to send emails<br>
+var email = (type, defectedService, error, cause)<br>
 >it has 4 parameters used by handlebars to make the templates of the mail. 
 >the "type" parameter defines what template will be used thus what type of mail is being sent ,making the
 > flexible enough to be function to be used anywhere in our codebase.
@@ -22,9 +22,9 @@ var email = (type, defectedService, error, cause)
 >This makes it also maps the services with our sites to know the cause of site being down.
 
 ### Fields in mappedConfig:-
->Mailinglist:- It contains the list of people to be alerted when alarm is triggered.
->Checkers:- It contains list of health checkers up right now
->Map:- It contains the maping between sites and cloud services.
+>Mailinglist:- It contains the list of people to be alerted when alarm is triggered.<br>
+>Checkers:- It contains list of health checkers up right now<br>
+>Map:- It contains the maping between sites and cloud services.<br>
 
 ## __LOADER.JS , pingConfig.json , rssConfig.json:-__
 >The 2 json files contain the state for rssPoll and ping_health functions. The Loader.js generates or updates these 2 files on initial setup or changes in main config file.
