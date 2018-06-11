@@ -22,19 +22,17 @@ let rssPoll = () => {
         let parsedFeed = await parser.parseURL(currURL);
         if (currURL == key) {
           //AMAZON LOOP
-          if (parsedFeed.items[1]) {
-            if (parsedFeed.items[1].title.startsWith("S")) {
+          if (parsedFeed.items[0]) {
+            if (parsedFeed.items[0].title.startsWith("S")) {
               if (rssConfig.status[key]) {
                 console.log("Everything Fine");
-                // console.log(parsedFeed.items[1].content);
                 processedURL();
               } else {
                 console.log("Error Resolved");
                 rssConfig.status[key] = true;
                 fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
-                // console.log(parsedFeed.items[1].content);
 
-                email("SERVERRRES", key, parsedFeed.items[1].title, parsedFeed.items[1].content)
+                email("SERVERRRES", key, parsedFeed.items[0].title, parsedFeed.items[0].content)
                 processedURL();
               }
             } else {
@@ -42,7 +40,7 @@ let rssPoll = () => {
                 console.log("New Error");
                 rssConfig.status[key] = false;
                 fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
-                email("SERVERR", key, parsedFeed.items[1].title, parsedFeed.items[1].content);
+                email("SERVERR", key, parsedFeed.items[0].title, parsedFeed.items[0].content);
                 processedURL();
               } else {
                 console.log("old error Persists");
@@ -56,15 +54,13 @@ let rssPoll = () => {
           }
         } else {
           //Google LOOP
-          // console.log( parsedFeed);
-
-          if (parsedFeed.items[1].link.indexOf(key) != -1) {
-            if (parsedFeed.items[1].title.startsWith("RESOLVED")) {
+          if (parsedFeed.items[0].link.indexOf(key) != -1) {
+            if (parsedFeed.items[0].title.startsWith("RESOLVED")) {
               if (rssConfig.status[key] == false) {
                 console.log("error resolved");
                 rssConfig.status[key] = true;
                 fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
-                email("SERVERRRES", key, parsedFeed.items[1].title, parsedFeed.items[1].content);
+                email("SERVERRRES", key, parsedFeed.items[0].title, parsedFeed.items[0].content);
                 processedURL();
               } else {
                 console.log("Everything alright");
@@ -78,7 +74,7 @@ let rssPoll = () => {
                 console.log("New error");
                 rssConfig.status[key] = false;
                 fs.writeFile("./rssConfig.json", JSON.stringify(rssConfig));
-                email("SERVERR", key, parsedFeed.items[1].title, parsedFeed.items[1].content)
+                email("SERVERR", key, parsedFeed.items[0].title, parsedFeed.items[0].content)
                 processedURL();
               }
             }

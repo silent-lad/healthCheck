@@ -1,9 +1,8 @@
 var nodemailer = require("nodemailer");
-var async = require("async");
 var hbs = require('nodemailer-express-handlebars');
 
-var mailingList = require("./mailingList.json");
 var mailCredentials = require("./mailCredentials.json");
+var { mailingList } = require("./mappedConfig.json");
 
 var email = (type, defectedService, error, cause) => {
   var defaultLayout;
@@ -44,7 +43,6 @@ var email = (type, defectedService, error, cause) => {
     }
   });
   console.log(defaultLayout);
-  var { mailingList } = require("./mappedConfig.json")
 
   mailer.use('compile', hbs(options));
   mailer.sendMail({
