@@ -11,17 +11,17 @@ async.each(map, el => {
     console.log(element);
   });
 });
-var con = { status };
+var config = { status };
 
 console.log(status);
-fs.writeFile("./rssConfig.json", JSON.stringify(con));
+fs.writeFile("./rssConfig.json", JSON.stringify(config));
 
 var url = Object.keys(map);
 
-var con2 = { list: [], maxFail: 5 };
+var config2 = { list: [], maxFail: 5 };
 
 url.forEach(address => {
-  con2.list.push({ URL: `${address}`, failCount: 0 });
+  config2.list.push({ URL: `${address}`, failCount: 0 });
 });
 
-fs.writeFile("./pingConfig.json", JSON.stringify(con2));
+fs.writeFile("./pingConfig.json", JSON.stringify(config2));

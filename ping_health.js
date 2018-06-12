@@ -57,7 +57,7 @@ var asyncPing = () => {
 };
 
 asyncPing();
-if (Date.now() % 1800 == 0) {
+if ((Date.now() % 18000) <= 3600) {
   pingCounterReset();
 }
 
