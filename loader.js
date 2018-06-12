@@ -20,8 +20,9 @@ var url = Object.keys(map);
 
 var config2 = { list: [], maxFail: 5 };
 
-url.forEach(address => {
+async.each(url, (address) => {
   config2.list.push({ URL: `${address}`, failCount: 0 });
 });
+
 
 fs.writeFile("./pingConfig.json", JSON.stringify(config2));
